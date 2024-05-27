@@ -1,10 +1,10 @@
 package Day2;
 
 public class Password {
-    int min;
-    int max;
-    char character;
-    String password;
+    private final int min;
+    private final int max;
+    private final char character;
+    private final String password;
 
     public Password(String s) {
         String[] sArray = s.split(" ");

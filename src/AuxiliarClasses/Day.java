@@ -22,6 +22,6 @@ public abstract class Day {
     }
 
     public void getResult() {
-        System.out.println("Day " + getDay() + ": Part 1 -> " + Part1() + " / Part 2 -> " + Part2() + "\n");
+        System.out.println("Day " + getDay() + ": Part 1 -> " + Part1() + " / Part 2 -> " + Part2());
     }
 }
