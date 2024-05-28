@@ -5,15 +5,16 @@ import AuxiliarClasses.Pair;
 import java.util.Arrays;
 import java.util.List;
 
-public class ToggoBan {
+public class Tobogan {
     private static final List<Pair> slopeList = List.of(new Pair(1, 1),
             new Pair(3, 1),
             new Pair(5, 1),
             new Pair(7, 1),
             new Pair(1, 2));
+
     private final char[][] board;
 
-    public ToggoBan(String s) {
+    public Tobogan(String s) {
         board = Arrays.stream(s.split("\n"))
                 .map(String::toCharArray)
                 .toArray(char[][]::new);

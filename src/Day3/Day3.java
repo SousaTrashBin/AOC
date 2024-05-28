@@ -7,11 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Day3 extends Day {
-    ToggoBan toggoBan;
+    Tobogan toggoBan;
 
     public Day3() throws IOException {
         super(3);
-        toggoBan = new ToggoBan(Files.readString(Path.of(getFile())));
+        toggoBan = new Tobogan(Files.readString(Path.of(getFile())));
     }
 
     @Override

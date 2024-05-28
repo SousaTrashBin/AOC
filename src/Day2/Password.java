@@ -8,8 +8,8 @@ public class Password {
 
     public Password(String s) {
         String[] sArray = s.split(" ");
-        min = Integer.valueOf(sArray[0].split("-")[0]);
-        max = Integer.valueOf(sArray[0].split("-")[1]);
+        min = Integer.parseInt(sArray[0].split("-")[0]);
+        max = Integer.parseInt(sArray[0].split("-")[1]);
         character = sArray[1].charAt(0);
         password = sArray[2];
     }
