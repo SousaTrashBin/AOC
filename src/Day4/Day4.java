@@ -9,8 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Day4 extends Day {
-
-    List<PersonID> idList;
+    private final List<PersonID> idList;
 
     public Day4() throws IOException {
         super(4);

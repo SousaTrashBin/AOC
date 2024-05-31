@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class Day2 extends Day {
-    List<Password> passwordList;
+    private final List<Password> passwordList;
 
     public Day2() throws IOException {
         super(2);

@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class PersonID {
 
-    Map<String, String> fieldMap = new HashMap<>();
+    private final Map<String, String> fieldMap = new HashMap<>();
 
     public PersonID(String s) {
         //Reformatar a string

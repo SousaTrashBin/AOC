@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class Day5 extends Day {
-    List<Seat> seatList;
+    private final List<Seat> seatList;
 
     public Day5() throws IOException {
         super(5);
@@ -17,7 +17,6 @@ public class Day5 extends Day {
                 .map(Seat::new)
                 .sorted((s1, s2) -> Integer.compare(s1.getSeatId(), s2.getSeatId()))
                 .toList();
-        seatList.forEach(s -> System.out.println(s.getSeatId()));
     }
 
     @Override

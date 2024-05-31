@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Day1 extends Day {
-    List<Integer> expenseList;
+    private final List<Integer> expenseList;
 
     public Day1() throws IOException {
         super(1);

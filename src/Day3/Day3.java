@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Day3 extends Day {
-    Tobogan toggoBan;
+    private final Tobogan toggoBan;
 
     public Day3() throws IOException {
         super(3);

@@ -1,8 +1,8 @@
 package Day5;
 
 public class Seat {
-    int row;
-    int column;
+    private final int row;
+    private final int column;
 
     public Seat(String s) {
         char[] charArray = s.toCharArray();
