@@ -31,14 +31,12 @@ public class PersonID {
     }
 
     boolean isIDValidPart1() {
-        fieldMap.entrySet().forEach(System.out::println);
         return fieldMap.entrySet().stream()
                 .filter(e -> !e.getKey().equals("cid"))
                 .count() == 7;
     }
 
     boolean isIDValidPart2() {
-        boolean b = isIDValidPart1();
         return fieldMap.entrySet().stream()
                 .filter(e -> !e.getKey().equals("cid") && validadeField(e.getKey(), e.getValue()))
                 .count() == 7;
@@ -77,7 +75,9 @@ public class PersonID {
                 return possibleValues.contains(value);
             }
             case "pid" -> {
-                return value.chars().map(c -> (char) c).filter(Character::isDigit).count() == 9;
+                return value.chars().map(c -> (char) c)
+                        .filter(Character::isDigit)
+                        .count() == 9;
             }
             default -> {
                 return true;
