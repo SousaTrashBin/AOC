@@ -1,4 +1,4 @@
 package AuxiliarClasses;
 
-public record Pair(int first, int second) {
+public record Pair<I, S>(I f, S s) {
 }

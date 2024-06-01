@@ -6,11 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Tobogan {
-    private static final List<Pair> slopeList = List.of(new Pair(1, 1),
-            new Pair(3, 1),
-            new Pair(5, 1),
-            new Pair(7, 1),
-            new Pair(1, 2));
+    private static final List<Pair<Integer, Integer>> slopeList = List.of(new Pair<Integer, Integer>(1, 1),
+            new Pair<Integer, Integer>(3, 1),
+            new Pair<Integer, Integer>(5, 1),
+            new Pair<Integer, Integer>(7, 1),
+            new Pair<Integer, Integer>(1, 2));
 
     private final char[][] board;
 
@@ -26,7 +26,7 @@ public class Tobogan {
 
     public long getTreesPart2() {
         return slopeList.stream()
-                .map(pair -> (long) getTrees(pair.first(), pair.second()))
+                .map(pair -> (long) getTrees(pair.f(), pair.s()))
                 .reduce(1L, (x, acc) -> x * acc);
     }
 
