@@ -9,16 +9,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Day 1.
+ */
 public class Day1 extends Day {
     private final List<Integer> expenseList;
 
+    /**
+     * Instantiates a new Day 1.
+     *
+     * @throws IOException the io exception
+     */
     public Day1() throws IOException {
         super(1);
         expenseList = Files.readString(Path.of(getFile())).lines().map(Integer::parseInt).toList();
     }
-
-    //1721,979,366,299
-    //(299,1721), (2020-979,979)
+    
     @Override
     public String Part1() {
         int twoEntries = getTwoEntries(2020);
