@@ -13,7 +13,7 @@ public class GameConsole {
     private int line = 0;
 
     public GameConsole(List<String> instructionList) {
-        this.initialInstructionList = instructionList;
+        initialInstructionList = instructionList;
     }
 
     public boolean processInstruction(List<String> instructionList) {
@@ -74,9 +74,8 @@ public class GameConsole {
 
     private boolean runProgram(List<String> instructionList) {
         while (line < instructionList.size())
-            if (!processInstruction(instructionList)) {
+            if (!processInstruction(instructionList))
                 return false;
-            }
         return true;
     }
 
