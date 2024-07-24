@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Day7 extends Day {
-    private BagCatalog bagCatalog = new BagCatalog();
+    private final BagCatalog bagCatalog = new BagCatalog();
 
     public Day7() throws IOException {
         super(7);

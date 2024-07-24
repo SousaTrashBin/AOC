@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class AdapterBag {
     private final List<Integer> adapters;
-    private ConcurrentMap<Integer,Long> memoMap = new ConcurrentHashMap<>();
+    private final ConcurrentMap<Integer,Long> memoMap = new ConcurrentHashMap<>();
 
     public AdapterBag(String s) {
         adapters = s.lines()

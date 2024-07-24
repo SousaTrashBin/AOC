@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.stream.IntStream;
 
 public class GameConsole {
-
     private final List<String> initialInstructionList;
     private Set<Integer> visitedLines = new HashSet<>();
     private int acc = 0;
