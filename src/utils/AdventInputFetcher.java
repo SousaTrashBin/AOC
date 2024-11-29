@@ -15,7 +15,7 @@ import java.util.Properties;
 public class AdventInputFetcher {
     Properties properties = new Properties();
 
-    AdventInputFetcher(){
+    public AdventInputFetcher() {
         try (InputStream propertiesInput = new FileInputStream(".properties")) {
             properties.load(propertiesInput);
             System.out.println("properties file successfully loaded");
@@ -25,15 +25,22 @@ public class AdventInputFetcher {
         }
     }
 
-    public void fetchAdventInput(int year,int day) {
-        if (!properties.containsKey("session")){
+    public void fetchYearInput(int year, int from, int to) {
+        if (from < 1 || from > to || to > 25) throw new IllegalArgumentException();
+        for (int i = from; i <= to; i++) {
+            fetchAdventInput(year, i);
+        }
+    }
+
+    public void fetchAdventInput(int year, int day) {
+        if (!properties.containsKey("session")) {
             throw new RuntimeException("session key doesn't exist");
         }
 
         String sessionId = properties.getProperty("session");
         URI inputURI = URI.create("https://adventofcode.com/" + year + "/day/" + day + "/input");
 
-        try(HttpClient httpClient = HttpClient.newHttpClient()){
+        try (HttpClient httpClient = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(inputURI)
                     .header("Cookie", "session=" + sessionId)
@@ -42,21 +49,14 @@ public class AdventInputFetcher {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             String input = response.body();
 
-            Path outputPath = Path.of("inputFiles/Day" + day + ".txt");
+            Path outputPath = Path.of("inputFiles/" + year + "/day" + day + ".txt");
             Files.createDirectories(outputPath.getParent());
 
             Files.writeString(outputPath, input, StandardOpenOption.CREATE_NEW);
             System.out.println("input fetched successfully");
-        }catch (IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             System.err.println("error fetching input: " + e.getMessage());
             throw new RuntimeException(e);
-        }
-    }
-
-    public static void main(String[] args) {
-        AdventInputFetcher adventInputFetcher = new AdventInputFetcher();
-        for (int day = 13; day <= 25; day++) {
-            adventInputFetcher.fetchAdventInput(2020,day);
         }
     }
 }

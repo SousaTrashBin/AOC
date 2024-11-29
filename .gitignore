@@ -1,4 +1,6 @@
 .properties
+AOC.iml/*
+.idea/*
 
 ### Java template
 # Compiled class file

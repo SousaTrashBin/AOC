@@ -1,30 +1,23 @@
 package utils;
 
-/**
- * The type Day.
- */
 public abstract class Day {
-    private final int day;
     private final String file;
 
-    public Day(int day) {
-        this.day = day;
-        file = "inputFiles/Day" + day + ".txt";
+    public Day(int year) {
+        file = "inputFiles/" + year + "/day" + getDay() + ".txt";
     }
 
     public abstract String Part1();
 
     public abstract String Part2();
 
-    public int getDay() {
-        return day;
-    }
+    public abstract int getDay();
 
     public String getFile() {
-        return file;
+        return this.file;
     }
 
-    public void getResult() {
-        System.out.println("Day " + getDay() + ": Part 1 -> " + Part1() + " / Part 2 -> " + Part2());
+    public String getResult() {
+        return "Day " + getDay() + ": Part 1 -> " + Part1() + " / Part 2 -> " + Part2();
     }
 }
