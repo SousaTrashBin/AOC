@@ -17,13 +17,13 @@ public class Day4 extends Day {
     }
 
     @Override
-    public String Part1() {
+    public String getPart1() {
         long validIDCount = idList.stream().filter(personID -> personID.isIDValidPart1()).count();
         return String.valueOf(validIDCount);
     }
 
     @Override
-    public String Part2() {
+    public String getPart2() {
         long validIDCount = idList.stream().filter(personID -> personID.isIDValidPart2()).count();
         return String.valueOf(validIDCount);
     }

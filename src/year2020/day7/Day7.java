@@ -17,12 +17,12 @@ public class Day7 extends Day {
     }
 
     @Override
-    public String Part1() {
+    public String getPart1() {
         return String.valueOf(bagCatalog.howManyBagsContain("shinygold"));
     }
 
     @Override
-    public String Part2() {
+    public String getPart2() {
         return String.valueOf(bagCatalog.howManyBagsInside("shinygold"));
     }
 

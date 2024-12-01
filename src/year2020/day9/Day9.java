@@ -15,12 +15,12 @@ public class Day9 extends Day {
     }
 
     @Override
-    public String Part1() {
+    public String getPart1() {
         return String.valueOf(xmasDecoder.findFirstInvalidNumber());
     }
 
     @Override
-    public String Part2() {
+    public String getPart2() {
         return String.valueOf(xmasDecoder.getEncryptionWeakness());
     }
 

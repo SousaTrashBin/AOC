@@ -15,12 +15,12 @@ public class Day3 extends Day {
     }
 
     @Override
-    public String Part1() {
+    public String getPart1() {
         return String.valueOf(toggoBan.getTrees());
     }
 
     @Override
-    public String Part2() {
+    public String getPart2() {
         return String.valueOf(toggoBan.getTreesPart2());
     }
 

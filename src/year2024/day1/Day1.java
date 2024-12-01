@@ -16,17 +16,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Day1 extends Day {
-    private static final Pattern pattern = Pattern.compile("(?<leftNumber>\\d+)\\s+(?<rightNumber>\\d+)");
+    private static final Pattern LINE_PATTERN = Pattern.compile("(?<leftNumber>\\d+)\\s+(?<rightNumber>\\d+)");
     private final List<Integer> leftList = new ArrayList<>();
     private final List<Integer> rightList = new ArrayList<>();
 
     public Day1(int year) throws IOException {
         super(year);
-        Files.readAllLines(Path.of(super.getFile())).forEach(this::parseLine);
+        Files.readAllLines(Path.of(super.getFile())).forEach(this::parseInputLine);
     }
 
-    private void parseLine(String line) {
-        Matcher matcher = pattern.matcher(line);
+    private void parseInputLine(String line) {
+        Matcher matcher = LINE_PATTERN.matcher(line);
         if (!matcher.find()) {
             return;
         }
@@ -35,7 +35,7 @@ public class Day1 extends Day {
     }
 
     @Override
-    public String Part1() {
+    public String getPart1() {
         List<Integer> leftListCopy = new ArrayList<>(leftList);
         leftListCopy.sort(Comparator.reverseOrder());
 
@@ -50,7 +50,7 @@ public class Day1 extends Day {
     }
 
     @Override
-    public String Part2() {
+    public String getPart2() {
         Map<Integer, Integer> rightFrequencyMap = rightList.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(_ -> 1)));
 

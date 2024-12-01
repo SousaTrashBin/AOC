@@ -17,14 +17,14 @@ public class Day11 extends Day {
     }
 
     @Override
-    public String Part1() {
+    public String getPart1() {
         while (part1Plane.processRoundPart1()) {
         }
         return String.valueOf(part1Plane.countOccupied());
     }
 
     @Override
-    public String Part2() {
+    public String getPart2() {
         while (part2Plane.processRoundPart2()) {
         }
         return String.valueOf(part2Plane.countOccupied());

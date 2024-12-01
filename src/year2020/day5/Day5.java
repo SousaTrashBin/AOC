@@ -21,12 +21,12 @@ public class Day5 extends Day {
     }
 
     @Override
-    public String Part1() {
+    public String getPart1() {
         return String.valueOf(seatList.getLast().getSeatId());
     }
 
     @Override
-    public String Part2() {
+    public String getPart2() {
         return String.valueOf(getMissingSeat());
     }
 

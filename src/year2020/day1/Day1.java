@@ -22,14 +22,14 @@ public class Day1 extends Day {
     }
 
     @Override
-    public String Part1() {
+    public String getPart1() {
         int twoEntries = getTwoEntries(2020);
         if (twoEntries != -1) return String.valueOf(twoEntries);
         return "";
     }
 
     @Override
-    public String Part2() {
+    public String getPart2() {
         for (Integer i : expenseList) {
             int threeEntries = getTwoEntries(2020 - i);
             if (threeEntries != -1) return String.valueOf(i * threeEntries);

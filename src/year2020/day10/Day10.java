@@ -15,13 +15,13 @@ public class Day10 extends Day {
     }
 
     @Override
-    public String Part1() {
+    public String getPart1() {
         int result = adapterBag.findNumberDifferences(1) * adapterBag.findNumberDifferences(3);
         return String.valueOf(result);
     }
 
     @Override
-    public String Part2() {
+    public String getPart2() {
         long validCombinations = adapterBag.numberOfValidCombinations();
         return String.valueOf(validCombinations);
     }

@@ -31,7 +31,7 @@ public class Day6 extends Day {
     }
 
     @Override
-    public String Part1() {
+    public String getPart1() {
         return groupList
                 .stream()
                 .map(Group::getNumberOfQuestions)
@@ -41,7 +41,7 @@ public class Day6 extends Day {
     }
 
     @Override
-    public String Part2() {
+    public String getPart2() {
         return groupList
                 .stream()
                 .map(Group::getNumberOfEveryoneYes)

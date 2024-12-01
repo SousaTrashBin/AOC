@@ -20,14 +20,14 @@ public class Day2 extends Day {
     }
 
     @Override
-    public String Part1() {
+    public String getPart1() {
         return String.valueOf(
                 passwordList.stream().filter(Password::isValidPart1).count()
         );
     }
 
     @Override
-    public String Part2() {
+    public String getPart2() {
         return String.valueOf(
                 passwordList.stream().filter(Password::isValidPart2).count()
         );

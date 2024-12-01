@@ -20,13 +20,13 @@ public class Day12 extends Day {
     }
 
     @Override
-    public String Part1() {
+    public String getPart1() {
         actions.forEach(action -> ferry1.processAction(action));
         return String.valueOf(ferry1.getManhattanDistance());
     }
 
     @Override
-    public String Part2() {
+    public String getPart2() {
         actions.forEach(action -> ferry2.processAction(action));
         return String.valueOf(ferry2.getManhattanDistance());
     }

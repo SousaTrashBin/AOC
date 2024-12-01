@@ -7,9 +7,9 @@ public abstract class Day {
         file = "inputFiles/" + year + "/day" + getDay() + ".txt";
     }
 
-    public abstract String Part1();
+    public abstract String getPart1();
 
-    public abstract String Part2();
+    public abstract String getPart2();
 
     public abstract int getDay();
 
@@ -18,6 +18,6 @@ public abstract class Day {
     }
 
     public String getResult() {
-        return "Day " + getDay() + ": Part 1 -> " + Part1() + " / Part 2 -> " + Part2();
+        return "Day " + getDay() + ": Part 1 -> " + getPart1() + " / Part 2 -> " + getPart2();
     }
 }
