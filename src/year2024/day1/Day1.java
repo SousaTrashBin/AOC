@@ -27,10 +27,11 @@ public class Day1 extends Day {
 
     private void parseLine(String line) {
         Matcher matcher = pattern.matcher(line);
-        if (matcher.find()) {
-            leftList.add(Integer.parseInt(matcher.group("leftNumber")));
-            rightList.add(Integer.parseInt(matcher.group("rightNumber")));
+        if (!matcher.find()) {
+            return;
         }
+        leftList.add(Integer.parseInt(matcher.group("leftNumber")));
+        rightList.add(Integer.parseInt(matcher.group("rightNumber")));
     }
 
     @Override
