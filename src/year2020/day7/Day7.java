@@ -13,7 +13,7 @@ public class Day7 extends Day {
         super(year);
         Files.readString(Path.of(getFile()))
                 .lines()
-                .forEach(bagLine -> bagCatalog.add(bagLine));
+                .forEach(bagCatalog::add);
     }
 
     @Override

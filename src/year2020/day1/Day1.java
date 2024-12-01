@@ -9,18 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * The type Day 1.
- */
+
 public class Day1 extends Day {
 
     private final List<Integer> expenseList;
 
-    /**
-     * Instantiates a new Day 1.
-     *
-     * @throws IOException the io exception
-     */
     public Day1(int year) throws IOException {
         super(year);
         expenseList = Files.lines(Path.of(getFile()))

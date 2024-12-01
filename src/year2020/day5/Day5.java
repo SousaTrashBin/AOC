@@ -5,6 +5,7 @@ import utils.Day;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 
 public class Day5 extends Day {
@@ -15,7 +16,7 @@ public class Day5 extends Day {
         seatList = Files.readString(Path.of(getFile()))
                 .lines()
                 .map(Seat::new)
-                .sorted((s1, s2) -> Integer.compare(s1.getSeatId(), s2.getSeatId()))
+                .sorted(Comparator.comparingInt(Seat::getSeatId))
                 .toList();
     }
 

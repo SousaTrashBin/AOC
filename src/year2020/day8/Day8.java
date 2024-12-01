@@ -6,15 +6,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-/**
- * The type Day 8.
- */
 public class Day8 extends Day {
     GameConsole gameConsole;
 
-    /**
-     * Instantiates a new Day 8.
-     */
     public Day8(int year) throws IOException {
         super(year);
         gameConsole = new GameConsole(Files.readString(Path.of(getFile())).lines().toList());

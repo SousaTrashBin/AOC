@@ -11,7 +11,6 @@ public class PersonID {
     private final Map<String, String> fieldMap = new HashMap<>();
 
     public PersonID(String s) {
-        //Reformatar a string
         s = s.replace("\n", " ");
 
         for (String field : s.split(" ")) {

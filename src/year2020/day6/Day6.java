@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 public class Day6 extends Day {
@@ -19,9 +18,6 @@ public class Day6 extends Day {
                 )
                 .map(Group::new)
                 .toList();
-
-        Comparator.comparing(String::length)
-                .thenComparing(String::hashCode);
     }
 
     private static int StringToInt(String string) {
