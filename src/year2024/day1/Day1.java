@@ -37,10 +37,10 @@ public class Day1 extends Day {
     @Override
     public String getPart1() {
         List<Integer> leftListCopy = new ArrayList<>(leftList);
-        leftListCopy.sort(Comparator.reverseOrder());
+        leftListCopy.sort(Comparator.comparing(Integer::intValue));
 
         List<Integer> rightListCopy = new ArrayList<>(rightList);
-        rightListCopy.sort(Comparator.reverseOrder());
+        rightListCopy.sort(Comparator.comparing(Integer::intValue));
 
         return String.valueOf(
                 IntStream.range(0, rightListCopy.size())
