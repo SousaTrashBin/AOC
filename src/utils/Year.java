@@ -39,10 +39,8 @@ public class Year {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Year ").append(year).append(":");
-        for (Day day : dayMap.values()) {
-            sb.append("\n     ").append(day.getResult());
-        }
+        sb.append("Year %d:".formatted(year));
+        dayMap.values().forEach(day -> sb.append("\n%s".formatted(day.getResult()).indent(5)));
         return sb.toString();
     }
 }
