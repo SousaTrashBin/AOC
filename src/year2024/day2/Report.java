@@ -2,6 +2,7 @@ package year2024.day2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Gatherers;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -22,16 +23,18 @@ public class Report {
 
     public boolean isSafePart2() { // currently creating new lists for every removed index, could be optimized by just skipping the index
         return isSafePart1() || IntStream.range(0, levels.size())
-                .mapToObj(this::getLevelsWithoutIndex)
+                .mapToObj(this::generateLevelsWithoutIndex)
                 .anyMatch(this::areLevelsMonotonic);
     }
 
     private boolean areLevelsMonotonic(List<Integer> levels) {
-        boolean allIncreasing = IntStream.range(0, levels.size() - 1)
-                .allMatch(index -> isWithinRange(levels.get(index), levels.get(index+1)));
+        boolean allIncreasing = levels.stream()
+                .gather(Gatherers.windowSliding(2))
+                .allMatch(window -> isWithinRange(window.getFirst(), window.getLast()));
 
-        boolean allDecreasing = IntStream.range(0, levels.size() - 1)
-                .allMatch(index -> isWithinRange(levels.get(index+1), levels.get(index)));
+        boolean allDecreasing = levels.stream()
+                .gather(Gatherers.windowSliding(2))
+                .allMatch(window -> isWithinRange(window.getLast(), window.getFirst()));
 
         return allIncreasing || allDecreasing;
     }
@@ -41,7 +44,7 @@ public class Report {
                 && upperValue - lowerValue <= MAX_LEVEL_DIFF;
     }
 
-    private List<Integer> getLevelsWithoutIndex(int index) {
+    private List<Integer> generateLevelsWithoutIndex(int index) {
         List<Integer> levelsWithoutIndex = new ArrayList<>(levels);
         levelsWithoutIndex.remove(index);
         return levelsWithoutIndex;
