@@ -2,9 +2,8 @@ package utils;
 
 public class YearExecutor {
     public static void main(String[] args) {
-        Year currentYear = new Year(2024);
-        int currentDay = 2;
-        currentYear.addDay(currentDay);
+        Year currentYear = new Year(2020);
+        currentYear.addAllPossibleDays();
         System.out.println(currentYear);
     }
 }
