@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 public class Report {
     private static final int MIN_LEVEL_DIFF = 1;
     private static final int MAX_LEVEL_DIFF = 3;
+
     private final List<Integer> levels;
 
     public Report(String line) {
