@@ -2,6 +2,7 @@ package year2024.day3;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -57,23 +58,20 @@ public class Memory {
     }
 
     public int getPart2(){
-        class CollectorState{
-            public boolean inActiveState = true;
-        }
         return operations.stream().<Multiplication>gather(Gatherer.ofSequential(
-                CollectorState::new,
+                () -> new AtomicBoolean(true),
                 (state,element,downstream) -> {
                     if (downstream.isRejecting()){
                         return false;
                     }
                     switch (element) {
-                        case StartCounting _ -> state.inActiveState = true;
-                        case StopCounting _ -> state.inActiveState = false;
-                        case Multiplication multiplication when state.inActiveState -> downstream.push(multiplication);
-                        default ->{}
+                        case StartCounting _ -> state.getAndSet(true);
+                        case StopCounting _ -> state.getAndSet(false);
+                        case Multiplication multiplication when state.get() -> downstream.push(multiplication);
+                        case Multiplication _ -> {}
                     }
                     return true;
                 }
-        )).mapToInt(Operation::evaluate).sum();
+        )).mapToInt(Multiplication::evaluate).sum();
     }
 }
