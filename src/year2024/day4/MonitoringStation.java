@@ -50,6 +50,7 @@ public class MonitoringStation {
 
     public int countXMASPresents() {
         return (int) getPositionsStream()
+                .filter(pos -> grid[pos.row()][pos.col()] == 'X')
                 .mapToLong(this::countXMASInAllDirections)
                 .sum();
     }
@@ -99,5 +100,5 @@ public class MonitoringStation {
                 .filter(diagonal -> containsWord("MAS", position.move(diagonal.opposite()), diagonal))
                 .count() == 2;
     }
-
+    
 }
