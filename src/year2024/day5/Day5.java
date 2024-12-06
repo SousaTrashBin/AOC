@@ -6,6 +6,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+record Position(int row, int col) {
+    Position move(Direction directionDelta) {
+        return new Position(row + directionDelta.rowDelta(), col + directionDelta.colDelta());
+    }
+}
+
+record Direction(int rowDelta,int colDelta){
+
+}
+
+
 public class Day5 extends Day {
     private final SafetyManual safetyManual;
 
