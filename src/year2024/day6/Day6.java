@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Day6 extends Day {
-    private GuardSearch guardSearch;
+    private final GuardSearch guardSearch;
 
     public Day6(int year) throws IOException {
         super(year);

@@ -3,17 +3,25 @@ package year2024.day6;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static year2024.day6.Direction.*;
+
 public class GuardSearch {
-    private int height;
-    private int width;
-    private Guard initialGuard;
-    private Set<Position> crates;
     private final static char CRATE_SYMBOL = '#';
-    private final static Set<Character> GUARD_SYMBOLS = Set.of('^','v','<','>');
+    private final static Map<Character, Direction> GUARD_SYMBOLS_TO_DIRECTION = Map.of(
+            '^', UP,
+            'v', DOWN,
+            '<', LEFT,
+            '>', RIGHT
+    );
+    private int gridHeight;
+    private int gridWidth;
+    private Guard startingGuard;
+    private Set<Position> crates;
 
     public GuardSearch(String input) {
         parseInput(input);
@@ -21,59 +29,52 @@ public class GuardSearch {
 
     private void parseInput(String input) {
         String[] lines = input.split("\n");
-        height = lines.length;
-        width = lines[0].length();
+        gridHeight = lines.length;
+        gridWidth = lines[0].length();
 
         initializeCrates(input);
-        initializeGuard(input);
+        initializeStartingGuard(input);
     }
 
     private void initializeCrates(String input) {
-        crates = getPositions()
+        crates = generateGridPositions()
                 .stream()
-                .filter(position -> getCharAtPosition(input,position) == CRATE_SYMBOL)
+                .filter(position -> getCharAtPosition(input, position) == CRATE_SYMBOL)
                 .collect(Collectors.toSet());
     }
 
-    private void initializeGuard(String input) {
-        Position initialGuardPosition = getPositions()
+    private void initializeStartingGuard(String input) {
+        record GuardInfo(Position position, char symbol) {
+        }
+        GuardInfo startingGuardGuardInfo = generateGridPositions()
                 .stream()
-                .filter(position -> GUARD_SYMBOLS.contains(getCharAtPosition(input, position)))
+                .map(position -> new GuardInfo(position, getCharAtPosition(input, position)))
+                .filter(guardInfo -> GUARD_SYMBOLS_TO_DIRECTION.containsKey(guardInfo.symbol))
                 .findFirst()
                 .get();
-        initialGuard = new Guard(initialGuardPosition,parseDirection(initialGuardPosition,input));
-    }
-
-    private Direction parseDirection(Position initialGuardPosition,String input) {
-        char symbol = getCharAtPosition(input,initialGuardPosition);
-        return switch (symbol) {
-            case '^' -> Direction.UP;
-            case 'v' -> Direction.DOWN;
-            case '<' -> Direction.LEFT;
-            default -> Direction.RIGHT;
-        };
+        startingGuard = new Guard(startingGuardGuardInfo.position, GUARD_SYMBOLS_TO_DIRECTION.get(startingGuardGuardInfo.symbol));
     }
 
     private char getCharAtPosition(String input, Position position) {
-        int index = position.row() * (width + 1) + position.col();
+        int index = position.row() * (gridWidth + 1) + position.col(); // +1 for \n
         return input.charAt(index);
     }
 
-    private List<Position> getPositions() {
-        return IntStream.range(0, height)
+    private List<Position> generateGridPositions() {
+        return IntStream.range(0, gridHeight)
                 .boxed()
-                .flatMap(row -> IntStream.range(0, width)
+                .flatMap(row -> IntStream.range(0, gridWidth)
                         .mapToObj(col -> new Position(row, col)))
                 .toList();
     }
 
     public int getPart1() {
-        return getPart1Aux(initialGuard, crates, new HashSet<>()).size();
+        return getPart1Aux(startingGuard, crates, new HashSet<>());
     }
 
-    private Set<Position> getPart1Aux(Guard currentGuard, Set<Position> crates, Set<Position> visited) {
+    private int getPart1Aux(Guard currentGuard, Set<Position> crates, Set<Position> visited) {
         if (isGuardOutsideGrid(currentGuard)) {
-            return visited;
+            return visited.size();
         }
 
         visited.add(currentGuard.getCurrentPosition());
@@ -82,21 +83,21 @@ public class GuardSearch {
                 ? getPart1Aux(currentGuard.rotate90Degrees(), crates, visited)
                 : getPart1Aux(nextGuard, crates, visited);
     }
-    
+
 
     public int getPart2() {
-        return (int) getPositions().stream()
-                .filter(potentialObstruction -> !potentialObstruction.equals(initialGuard.getCurrentPosition()) &&
-                        !crates.contains(potentialObstruction))
+        return (int) generateGridPositions().stream()
+                .filter(potentialCrate -> !potentialCrate.equals(startingGuard.getCurrentPosition()) &&
+                        !crates.contains(potentialCrate))
                 .filter(this::wouldCauseLoop)
                 .count();
     }
 
-    private boolean wouldCauseLoop(Position newObstruction) {
+    private boolean wouldCauseLoop(Position newCrate) {
         Set<Position> simulatedCrates = new HashSet<>(crates);
-        simulatedCrates.add(newObstruction);
+        simulatedCrates.add(newCrate);
 
-        return wouldCauseLoopAux(initialGuard, simulatedCrates, new HashSet<>());
+        return wouldCauseLoopAux(startingGuard, simulatedCrates, new HashSet<>());
     }
 
     private boolean wouldCauseLoopAux(Guard currentGuard, Set<Position> simulatedCrates, Set<Guard> visitedStates) {
@@ -116,7 +117,7 @@ public class GuardSearch {
 
     private boolean isGuardOutsideGrid(Guard guard) {
         Position guardPosition = guard.getCurrentPosition();
-        return guardPosition.row() < 0 || guardPosition.row() >= height
-                || guardPosition.col() < 0 || guardPosition.col() >= width;
+        return guardPosition.row() < 0 || guardPosition.row() >= gridHeight
+                || guardPosition.col() < 0 || guardPosition.col() >= gridWidth;
     }
 }
