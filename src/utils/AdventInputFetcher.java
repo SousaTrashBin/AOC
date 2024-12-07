@@ -52,7 +52,7 @@ public class AdventInputFetcher {
             Path outputPath = Path.of("inputFiles/" + year + "/day" + day + ".txt");
             Files.createDirectories(outputPath.getParent());
 
-            Files.writeString(outputPath, input, StandardOpenOption.CREATE_NEW);
+            Files.writeString(outputPath, input, StandardOpenOption.CREATE);
             System.out.println("input fetched successfully");
         } catch (IOException | InterruptedException e) {
             System.err.println("error fetching input: " + e.getMessage());

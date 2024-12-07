@@ -27,8 +27,9 @@ public class Year {
             Day dayInstance = (Day) dayConstructor.newInstance(year);
             dayMap.put(day, dayInstance);
         } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException |
-                 InvocationTargetException _) {
-            //System.out.println("Couldn't add day " + day);
+                 InvocationTargetException ex) {
+            System.out.println("Couldn't add day " + day);
+            ex.printStackTrace();
         }
     }
 
