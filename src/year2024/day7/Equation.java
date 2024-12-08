@@ -21,7 +21,7 @@ public class Equation {
         if (matcher.find()) {
             result = Long.parseLong(matcher.group("result"));
             numbers = Arrays.stream(matcher.group("numbers").split(" "))
-                    .skip(1)
+                    .filter(s -> !s.isEmpty())
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
         }

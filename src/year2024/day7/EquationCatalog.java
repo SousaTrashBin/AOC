@@ -13,6 +13,7 @@ public class EquationCatalog {
 
     public long getValidEquationCountPart1() {
         return equations.stream()
+                .parallel()
                 .filter(Equation::isValidPart1)
                 .mapToLong(Equation::getResult)
                 .sum();
@@ -20,6 +21,7 @@ public class EquationCatalog {
 
     public long getValidEquationCountPart2() {
         return equations.stream()
+                .parallel()
                 .filter(Equation::isValidPart2)
                 .mapToLong(Equation::getResult)
                 .sum();
