@@ -3,7 +3,7 @@ package utils;
 public class YearExecutor {
     public static void main(String[] args) {
         Year currentYear = new Year(2024);
-        currentYear.addDay(7);
+        currentYear.addDay(8);
         System.out.println(currentYear);
     }
 }
