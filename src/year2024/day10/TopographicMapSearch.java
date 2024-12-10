@@ -30,23 +30,7 @@ public class TopographicMapSearch {
     }
 
     private int getHikingTrailCountPart1(Position possibleTrailheadPosition) {
-        return getHikingTrailCountDFSPart1(possibleTrailheadPosition,new HashSet<>());
-    }
-
-    private int getHikingTrailCountDFSPart1(Position currentPosition, Set<Position> set) {
-        int currentValue = positions.get(currentPosition);
-        for (Direction direction : Direction.values()) {
-            Position newPosition = currentPosition.move(direction);
-            if (isValidPosition(newPosition)) {
-                int newValue = positions.get(newPosition);
-                if (newValue == currentValue + 1) {
-                    getHikingTrailCountDFSPart1(newPosition,set);
-                    if (newValue == 9)
-                        set.add(newPosition);
-                }
-            }
-        }
-        return set.size();
+        return getHikingTrailCountDFS(possibleTrailheadPosition,new HashSet<>());
     }
 
     public int getTrailCountPart2() {
@@ -54,23 +38,22 @@ public class TopographicMapSearch {
     }
 
     private int getHikingTrailCountPart2(Position possibleTrailheadPosition) {
-        return getHikingTrailCountDFSPart2(possibleTrailheadPosition);
+        return getHikingTrailCountDFS(possibleTrailheadPosition,new ArrayList<>());
     }
 
-    private int getHikingTrailCountDFSPart2(Position currentPosition) {
+    private int getHikingTrailCountDFS(Position currentPosition, Collection<Position> collection) {
         int currentValue = positions.get(currentPosition);
-        int result = 0;
         for (Direction direction : Direction.values()) {
             Position newPosition = currentPosition.move(direction);
             if (isValidPosition(newPosition)) {
                 int newValue = positions.get(newPosition);
                 if (newValue == currentValue + 1) {
-                    result += getHikingTrailCountDFSPart2(newPosition);
-                    result += newValue == 9 ? 1 : 0;
+                    getHikingTrailCountDFS(newPosition,collection);
+                    if (newValue == 9) collection.add(newPosition);
                 }
             }
         }
-        return result;
+        return collection.size();
     }
 
     private boolean isValidPosition(Position position) {
