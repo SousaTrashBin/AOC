@@ -14,7 +14,8 @@ record RockBlink(long currentValue, int iterationsLeft) {
         if (currentValue == 0) {
             return Stream.of(new RockBlink(1, iterationsLeft - 1));
         }
-        if (Math.floor(Math.log10(currentValue) + 1) % 2 == 0) {
+        boolean isNumDigitsEven = Math.floor(Math.log10(currentValue) + 1) % 2 == 0;
+        if (isNumDigitsEven) {
             String rockString = String.valueOf(currentValue);
             return Stream.of(
                     new RockBlink(Long.parseLong(rockString.substring(0, rockString.length() / 2)), iterationsLeft - 1),
@@ -26,10 +27,10 @@ record RockBlink(long currentValue, int iterationsLeft) {
 }
 
 public class Rockline {
-    private final List<Integer> rocks;
+    private final List<Integer> rocksValue;
 
     public Rockline(String input) {
-        rocks = Arrays.stream(input.split(" "))
+        rocksValue = Arrays.stream(input.split(" "))
                 .map(Integer::parseInt)
                 .toList();
     }
@@ -39,7 +40,7 @@ public class Rockline {
     }
 
     private long getRocksCountAfterNIterations(int n, Map<RockBlink, Long> cache) {
-        return rocks.stream()
+        return rocksValue.stream()
                 .map(val -> new RockBlink(val, n))
                 .mapToLong(rock -> getRockCountAfterNIterations(rock, cache))
                 .sum();
@@ -54,10 +55,11 @@ public class Rockline {
             return cache.get(rock);
         }
 
-        long result = rock.getRockAfterBlink()
+        long rockCount = rock.getRockAfterBlink()
                 .mapToLong(rockBlink -> getRockCountAfterNIterations(rockBlink, cache))
                 .sum();
-        cache.put(rock, result);
-        return result;
+
+        cache.put(rock, rockCount);
+        return rockCount;
     }
 }
